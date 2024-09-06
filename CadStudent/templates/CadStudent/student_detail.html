@@ -1,0 +1,30 @@
+{% extends 'CadStudent/base.html' %}
+{% block content %}
+    
+    
+  <h2>{{ student.name }}</h2>
+  <div>
+    <img src="{{ student.photo.url }}" alt="{{ student.name }}" width="150" height="150">
+  </div>
+  <ul>
+    <li><strong>Nome:</strong> {{ student.name }}</li>
+    <li><strong>Idade:</strong> {{ student.age }}</li>
+    <li><strong>CPF:</strong> {{ student.cpf }}</li>
+    <li><strong>Data de Nascimento:</strong> {{ student.birth_date }}</li>
+    <li><strong>Período do Curso:</strong> {{ student.course_period }}</li>
+    <li><strong>Cursos Matriculados:</strong>
+      <ul>
+        {% for course in student.courses.all %}
+          <li>{{ course.name }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+
+  <!-- Botão para Editar -->
+  <button onclick="window.location.href='{% url 'student_edit' student.pk %}'" class="btn btn-primary">Editar</button>
+
+  <!-- Botão que atua como um link -->
+  <button onclick="window.location.href='{% url 'student_list' %}'" class="btn btn-secondary">Voltar para a Lista</button>
+  
+{% endblock %}
